@@ -12,7 +12,11 @@ import org.json.JSONObject;
 
 public class Int32Message extends Message{
     private static final String TAG = "au.gov.defence.dsa.ros.msg.Int32Message";
-    int data;
+    protected int data;
+
+    public Int32Message() { this(0); };
+
+    public Int32Message(int inData) { data = inData; }
 
     public int getData() {
         return data;
@@ -35,10 +39,11 @@ public class Int32Message extends Message{
         try {
             JSONObject message = inJSONObject.getJSONObject("msg");
             this.data = message.getInt("data");
+            return this;
         } catch (JSONException e) {
             e.printStackTrace();
             Log.println(Log.ERROR, TAG, e.getMessage());
         }
-        return this;
+        return null;
     }
 }
